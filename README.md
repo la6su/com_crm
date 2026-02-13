@@ -54,6 +54,37 @@ php administrator/components/com_crm/tests/run_tests.php
 
 ---
 
+## 🗄 Дамп Базы Данных (На случай ручной установки)
+
+Если при установке компонента таблицы не создались автоматически, выполните этот SQL запрос (замените `#__` на ваш префикс таблиц, например `jos_`):
+
+```sql
+CREATE TABLE IF NOT EXISTS `#__crm_companies` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `stage_code` varchar(10) NOT NULL DEFAULT 'C0',
+    `stage_name` varchar(50) NOT NULL DEFAULT 'Ice',
+    `context_data` TEXT,
+    `published` tinyint(4) NOT NULL DEFAULT 1,
+    `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    INDEX `idx_stage` (`stage_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `#__crm_history` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `company_id` int(11) NOT NULL,
+    `event_key` varchar(50) NOT NULL,
+    `comment` TEXT,
+    `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    INDEX `idx_company` (`company_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `#__crm_companies` (`name`, `stage_code`, `stage_name`, `context_data`) VALUES 
+('ООО Тестовый Клиент', 'C0', 'Ice', '{}');
+```
+---
+
 ## 🤖 AI Workflow (Отчет)
 Для разработки использовался мульти-агентный подход, результаты аудита записаны в виде отчета `docs/AI_Workflow.md`
 1. **Генерация кода:**

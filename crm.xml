@@ -11,7 +11,7 @@
 
     <administration>
         <!-- Ссылка в меню админки -->
-        <menu link="index.php?option=com_crm&amp;view=company&amp;id=1">CRM Dashboard</menu>
+        <menu link="index.php?option=com_crm&amp;view=companies">CRM Dashboard</menu>
         
         <files folder="administrator/components/com_crm">
             <filename>crm.xml</filename>

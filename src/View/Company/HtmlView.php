@@ -7,17 +7,17 @@ defined('_JEXEC') or die;
 
 class HtmlView extends BaseHtmlView
 {
-    protected $item;
-
     public function display($tpl = null)
     {
+        // Получаем данные из модели (Item = результат getItem())
         $this->item = $this->get('Item');
-        
-        if (!$this->item) {
-            echo "Компания не найдена (ID=1). Проверьте БД.";
-            return;
+
+        // Проверка на ошибки модели
+        if (count($errors = $this->get('Errors'))) {
+            throw new \Exception(implode("\n", $errors), 500);
         }
 
+        // Вызываем рендеринг шаблона (default.php)
         parent::display($tpl);
     }
 }

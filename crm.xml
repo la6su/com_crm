@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="5.0" method="upgrade">
+    <!-- ВАЖНО: Имя должно совпадать с названием папки -->
+    <name>com_crm</name>
+    <version>1.0.0</version>
+    <description>CRM Logic Test</description>
+    <namespace path="src">Joomla\Component\Crm</namespace>
+    <author>You</author>
+    
+    <!-- Мы убрали блок <install><sql>...</sql></install>, так как таблицы уже есть -->
+
+    <administration>
+        <!-- Ссылка в меню админки -->
+        <menu link="index.php?option=com_crm&amp;view=company&amp;id=1">CRM Dashboard</menu>
+        
+        <files folder="administrator/components/com_crm">
+            <filename>crm.xml</filename>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <!-- Папку sql можно оставить в файлах, но не запускать -->
+            <folder>sql</folder>
+        </files>
+    </administration>
+</extension>
